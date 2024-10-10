@@ -2,6 +2,8 @@ const express = require("express"); // init express js
 const body_parser = require("body-parser"); // init body parser
 const cors = require("cors"); // init cors
 const app = express(); // create new app
+require("./config/db.config");
+require("dotenv").config();
 
 /**
  * use all middlewares
@@ -15,13 +17,14 @@ app.use(body_parser.json({ limit: "100mb" })); // Increase limit if needed
  * import all routes here
  */
 
-// all routes will be import here................
+const userRoute = require("./routes/auth.route");
 
 /**
  * connect all routes
  */
 
 // connect all routes here...................
+app.use("/", userRoute);
 
 // home route
 app.get("/", (req, res) => {
