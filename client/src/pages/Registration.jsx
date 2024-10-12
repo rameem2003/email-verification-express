@@ -3,6 +3,7 @@ import Image from "../components/common/Image";
 
 import { useNavigate } from "react-router-dom";
 import { Blocks } from "react-loader-spinner";
+import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -13,8 +14,31 @@ const Registration = () => {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true);
+
+    const res = await axios.post(
+      "http://localhost:5000/register",
+      {
+        name,
+        email,
+        pass: password,
+        isVarified: false,
+      },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log(res);
+    setLoading(false);
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   return (

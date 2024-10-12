@@ -4,7 +4,7 @@ const User = require("../model/users.model");
 require("dotenv").config();
 
 const registeruser = async (req, res) => {
-  const { email, pass } = req.body;
+  const { name, email, pass } = req.body;
 
   // Create a verification token (valid for 1 hour)
   const token = jwt.sign({ email }, process.env.JWT_SECRET, {
@@ -33,7 +33,7 @@ const registeruser = async (req, res) => {
   try {
     await transporter.sendMail(mailOptions);
 
-    let newUser = new User({ email, pass, isVarified: false });
+    let newUser = new User({ name, email, pass, isVarified: false });
 
     newUser.save();
 

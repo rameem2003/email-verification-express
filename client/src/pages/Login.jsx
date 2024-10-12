@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import Image from "../components/common/Image";
 import { Blocks } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LoginReducer } from "../AuthSlice";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
   };
 
